@@ -5,17 +5,55 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:p=>
+	xmlns:p="http://primefaces.org/ui">
+	
+	<h:head>
+	<title>Indicadores de Manutencao</title>
+	<h:outputStylesheet library="css" name="bootstrap.css" />
+</h:head>
 
-<ui:composition template="">
-	<ui:define name="header">
-	    Add your header here or delete to use the default
-	</ui:define>
-	<ui:define name="content">
-	    Add your content here or delete to use the default
-	</ui:define>
-	<ui:define name="footer">
-	    Add your footer here or delete to use the default
-	</ui:define>
-</ui:composition>
+<h:body>
+<ui:insert name="cabecalho">
+	<div id="cabecalho">
+		<ul id="menu-principal">
+			<li><h:link value="Usuário" outcome="/pages/usuario/lista" /></li>
+			<li><h:link value="Bugs" outcome="/pages/bug/lista" /></li>
+		</ul>
+		<div id="user-info">
+			<h:form>
+				#{usuarioWeb.usuario.login} - 
+				<h:commandLink value="Sair" action="#{loginBean.deslogar}"/>
+			</h:form>
+		</div>
+	</div>
+</ui:insert>
+	
+	<!--   <h:messages errorClass="errors" infoClass="notice"/>-->
+	
+	<p:growl autoUpdate="true"/>
+	
+	
+	<div id="conteudo">
+		<p:ajaxStatus>
+			<f:facet name="start">
+				<h:graphicImage library="imagens" name="ajax-loader.gif"/>
+			</f:facet>
+			<f:facet name="complete">
+				<h:outputText value=""/>
+			</f:facet>
+		</p:ajaxStatus>
+		<div id="container">
+			<ui:insert name="corpo"/>
+		</div>
+	</div>
+	
+	<div id="rodape">
+		<div class="rodape-bar">
+			<strong>Bug Tracker</strong> - Controle de bugs | Triadworks
+		</div>
+	</div>
+</h:body>
+	
+
+
 </html>
