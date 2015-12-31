@@ -41,7 +41,7 @@ public class GrupoBean {
 	
 	public void adiciona(){
 		GrupoDao dao = new GrupoDao();
-		dao.adiciona(grupo);
+		dao.adiciona(this.grupo);
 		this.grupo = new Grupo();
 		
 	}

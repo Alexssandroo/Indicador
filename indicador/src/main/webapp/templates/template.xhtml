@@ -5,7 +5,8 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	>
 
 <h:head>
 	<title>Indicadores de Manutencao</title>
@@ -15,10 +16,17 @@
 <h:body>
 	<div class="container">
 		<div class="page-header">
-			<h4>
-				<h:outputText value="Empresa Vitória"/>
-				<small><h:outputText value="Indicadores de manutenção"/></small>
-			</h4>
+			<div class="row">
+				<div class="col-md-10">
+					<h4>
+						<h:outputText value="Empresa Vitória" />
+						<small><h:outputText value="Indicadores de manutenção" /></small>
+					</h4>
+				</div>
+				<div class="col-md-2" align="right">
+					<p:graphicImage library="image" name="logo-vit2.jpg" />
+				</div>
+			</div>
 		</div>
 
 
@@ -34,9 +42,9 @@
 						<p:menuitem value="Ocorrências" url="#" />
 					</p:submenu>
 					<p:submenu label="Cadastros" icon="ui-icon-document">
-						<p:menuitem value="Funcionários" url="#" />
+						<p:menuitem value="Funcionários" outcome="/public/pages/funcionario/novo" />
 						<p:menuitem value="Função" outcome="/public/pages/funcao/novo" />
-						<p:menuitem value="Grupo" outcome="/public/pages/grupo/novo"/>
+						<p:menuitem value="Grupo" outcome="/public/pages/grupo/novo" />
 					</p:submenu>
 
 					<f:facet name="options">
