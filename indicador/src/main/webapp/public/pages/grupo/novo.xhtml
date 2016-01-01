@@ -13,12 +13,13 @@
 	<div class="panel-heading">Cadastro de grupos</div>
 	<div class="panel-body">
 		<h:form>
-			<h:outputLabel value="Fabricante" for="nome" />
-			<h:inputText id="nome" value="#{grupoBean.grupo.nome}"
+			<p:outputLabel value="Grupo" for="nome" />
+			<p:inputText id="nome" value="#{grupoBean.grupo.nome}"
 				required="true" label="Nome" />
 
-			<h:commandButton value="Salvar" action="#{grupoBean.adiciona}">
-			</h:commandButton>
+			<p:commandButton value="Salvar" icon="ui-icon-disk" action="#{grupoBean.adiciona}" >
+			 <f:ajax immediate="true" render="@form"/>
+			</p:commandButton>
 
 		</h:form>
 		</div>
