@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.event.ActionEvent;
-import javax.faces.model.DataModel;
 
 import com.vitoria.dao.GrupoDao;
 import com.vitoria.model.Grupo;
