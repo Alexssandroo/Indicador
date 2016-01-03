@@ -9,7 +9,6 @@ import javax.faces.bean.ViewScoped;
 
 import com.vitoria.dao.FuncaoDao;
 import com.vitoria.model.Funcao;
-import com.vitoria.model.Grupo;
 import com.vitoria.util.FacesUtils;
 
 @ManagedBean
@@ -43,7 +42,7 @@ public class FuncaoBean implements Serializable {
 		this.funcoes = dao.lista();
 	}
 	
-	public void remover(Grupo grupo){
+	public void remover(Funcao funcao){
 		FuncaoDao dao = new FuncaoDao();
 		dao.remove(funcao);
 		this.funcoes = dao.lista();
@@ -60,6 +59,7 @@ public class FuncaoBean implements Serializable {
 
 	public Funcao getFuncao() {
 		return funcao;
+		
 	}
 
 	public void setFuncao(Funcao funcao) {

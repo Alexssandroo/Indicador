@@ -13,18 +13,32 @@
 			<div class="panel-heading">Cadastro de Funcionários</div>
 			<div class="panel-body">
 
-				<h:form>
+				<h:form id="form">
 					<p:panelGrid columns="2">
-						<h:outputLabel value="Nome" for="nome" />
-						<h:inputText id="nome" required="true" label="Nome" />
+						<p:outputLabel value="Nome" for="nome" />
+						<p:inputText id="nome" required="true" label="Nome"
+							value="#{funcionarioBean.funcionario.nome}" placeholder="Nome do funcionario"/>
+						<p:outputLabel value="Matricula" for="mat" />
+						<p:inputText id="mat" required="true" label="Matricula"
+							value="#{funcionarioBean.funcionario.matricula}" />
+							
 
-						<h:outputLabel value="Função" for="funcao" />
-						<h:inputText id="funcao" required="true" label="Função" />
-
-						<h:outputLabel value="Grupo" for="funcao" />
-						<h:inputText id="grupo" required="true" label="Grupo" />
-					</p:panelGrid>
-					<p:commandButton value="Salvar" icon="ui-icon-disk">
+						<p:outputLabel value="Função" for="funcao" />
+						<p:selectOneMenu id="funcao" label="Função" required="true" 
+						 value="#{funcionarioBean.funcionario.funcao.id}">
+							<f:selectItem itemLabel="Selecione uma funcao" noSelectionOption="true"/>
+							<f:selectItems value="#{funcionarioBean.funcoes}" var="f"
+								itemLabel="#{f.nome}" itemValue="#{f.id}" />
+						</p:selectOneMenu>
+						<h:outputLabel value="Grupo" for="grupo" />
+						<p:selectOneMenu id="grupo" label="Grupo" required="true" 
+						 value="#{funcionarioBean.funcionario.grupo.id}">
+							<f:selectItem itemLabel="Selecione um grupo" noSelectionOption="true"/>
+							<f:selectItems value="#{funcionarioBean.grupos}" var="g"
+								itemLabel="#{g.nome}" itemValue="#{g.id}" />
+						</p:selectOneMenu>
+						</p:panelGrid>
+					<p:commandButton value="Salvar" icon="ui-icon-disk" action="#{funcionarioBean.adiciona}" >
 					</p:commandButton>
 
 				</h:form>

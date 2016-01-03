@@ -15,8 +15,9 @@ public class Funcionario implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY )
 	private int id;
+	private int matricula;
 	private String nome;
 	@OneToOne
 	private Funcao funcao;
@@ -29,6 +30,13 @@ public class Funcionario implements Serializable{
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	
+	public int getMatricula() {
+		return matricula;
+	}
+	public void setMatricula(int matricula) {
+		this.matricula = matricula;
 	}
 	public String getNome() {
 		return nome;

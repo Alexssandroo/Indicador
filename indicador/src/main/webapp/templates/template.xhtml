@@ -34,19 +34,19 @@
 			<h:form>
 				<p:growl id="messages" autoUpdate="true" />
 				<p:menubar>
-					<p:submenu label="Lançamentos" icon="ui-icon-document">
+					<p:submenu label="Cadastros" icon="ui-icon-document">
+						<p:menuitem value="Funcionário" outcome="/public/pages/funcionario/novo" />
+						<p:menuitem value="Função" outcome="/public/pages/funcao/lista" />
+						<p:menuitem value="Grupo" outcome="/public/pages/grupo/lista" />
+					</p:submenu>
+					
+					<p:submenu label="Movimentos" icon="ui-icon-document">
 						<p:submenu label="Indicadores">
 							<p:menuitem value="Individuais" url="#" />
 							<p:menuitem value="Grupo" url="#" />
 						</p:submenu>
 						<p:menuitem value="Ocorrências" url="#" />
 					</p:submenu>
-					<p:submenu label="Cadastros" icon="ui-icon-document">
-						<p:menuitem value="Funcionários" outcome="/public/pages/funcionario/novo" />
-						<p:menuitem value="Função" outcome="/public/pages/funcao/novo" />
-						<p:menuitem value="Grupo" outcome="/public/pages/grupo/lista" />
-					</p:submenu>
-
 					<f:facet name="options">
 						<p:commandButton type="button" value="Logout"
 							icon="ui-icon-extlink" />
