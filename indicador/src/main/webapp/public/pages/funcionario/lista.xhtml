@@ -25,7 +25,8 @@
 					</p:toolbar>
 					<p:dataTable rendered="true" id="funcionarios" var="funcionario"
 						value="#{funcionarioBean.funcionarios}" emptyMessage="Funcionarios não encontradas."
-						initMode="immediate" selection="#{funcionarioBean.funcionario}">
+						initMode="immediate" selection="#{funcionarioBean.funcionario}" 
+						paginator="true" rows="10" paginatorPosition="bottom" paginatorAlwaysVisible="false">
 						<p:column id="id" headerText="Id">
 							<h:outputText value="#{funcionario.id}" />
 						</p:column>
