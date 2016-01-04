@@ -12,46 +12,36 @@
 	<ui:define name="corpo">
 
 		<div class="panel panel-default">
-			<div class="panel-heading">Funcionários da Manutenção</div>
+			<div class="panel-heading">Funções de Manutenção</div>
 			<div class="panel-body">
 				<h:form id="form">
 					<p:toolbar>
 						<f:facet name="right">
 							<p:commandButton value="Novo" icon="ui-icon-plus" onclick="PF('dlgNovo').show();" process="@this"></p:commandButton>
 							<p:commandButton value="Buscar" icon="ui-icon-search"
-								action="#{funcionarioBean.lista}" process="@this" update="funcionarios">
+								action="#{funcaoBean.lista}" process="@this" update="funcoes">
 							</p:commandButton>
 						</f:facet>
 					</p:toolbar>
-					<p:dataTable rendered="true" id="funcionarios" var="funcionario"
-						value="#{funcionarioBean.funcionarios}" emptyMessage="Funcionarios não encontradas."
-						initMode="immediate" selection="#{funcionarioBean.funcionario}">
+					<p:dataTable rendered="true" id="funcoes" var="funcao"
+						value="#{funcaoBean.funcoes}" emptyMessage="Funções não encontradas."
+						initMode="immediate" selection="#{funcaoBean.funcao}">
 						<p:column id="id" headerText="Id">
-							<h:outputText value="#{funcionario.id}" />
+							<h:outputText value="#{funcao.id}" />
 						</p:column>
 
-						<p:column id="matricula" headerText="Matricula">
-							<h:outputText value="#{funcionario.matricula}" />
-						</p:column>
 						<p:column id="nome" headerText="Nome">
-							<h:outputText value="#{funcionario.nome}" />
+							<h:outputText value="#{funcao.nome}" />
 						</p:column>
-						<p:column id="funcao" headerText="Função">
-							<h:outputText value="#{funcionario.funcao.nome}" />
-						</p:column>
-						<p:column id="grupo" headerText="Grupo">
-							<h:outputText value="#{funcionario.grupo.nome}" />
-						</p:column>
-						
 						<p:column headerText="Ações">
 
 							<p:commandButton id="remover"
-								action="#{funcionarioBean.remover(funcionario)}" icon="ui-icon-trash"
-								process="@this" update="funcionarios" />
+								action="#{funcaoBean.remover(funcao)}" icon="ui-icon-trash"
+								process="@this" update="funcoes" />
 
 							<p:commandButton id="editar" icon="ui-icon-pencil"
 								update="formEdita" onclick="PF('dlgEdita').show();">
-								<f:setPropertyActionListener target="#{funcionarioBean.funcionario}" value="#{funcionario}" />
+								<f:setPropertyActionListener target="#{funcaoBean.funcao}" value="#{funcao}" />
 							</p:commandButton>
 
 						</p:column>
@@ -71,7 +61,7 @@
 							<p:inputText id="nome" value="#{funcaoBean.funcao.nome}"
 								required="true" />
 						</p:panelGrid>
-						<p:commandButton update=":form:funcionarios"
+						<p:commandButton update=":form:funcoes"
 							oncomplete="PF('dlgEdita').hide();" value="Salvar"
 							action="#{funcaoBean.edita}"/>
 					</h:form>
@@ -86,7 +76,7 @@
 						<p:inputText id="nome" value="#{funcaoBean.funcao.nome}"
 				                     required="true" label="Nome" />
 					 </p:panelGrid>
-						<p:commandButton update=":form:funcionarios"
+						<p:commandButton update=":form:funcoes"
 							oncomplete="PF('dlgNovo').hide();" value="Salvar"
 							icon="ui-icon-disk" actionListener="#{funcaoBean.adiciona}">
 						</p:commandButton>

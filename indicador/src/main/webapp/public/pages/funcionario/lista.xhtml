@@ -30,15 +30,19 @@
 							<h:outputText value="#{funcionario.id}" />
 						</p:column>
 
+						<p:column id="matricula" headerText="Matricula">
+							<h:outputText value="#{funcionario.matricula}" />
+						</p:column>
 						<p:column id="nome" headerText="Nome">
 							<h:outputText value="#{funcionario.nome}" />
 						</p:column>
 						<p:column id="funcao" headerText="Função">
-							<h:outputText value="#{funcionario.funcao}" />
+							<h:outputText value="#{funcionario.funcao.nome}" />
 						</p:column>
 						<p:column id="grupo" headerText="Grupo">
-							<h:outputText value="#{funcionario.grupo}" />
+							<h:outputText value="#{funcionario.grupo.nome}" />
 						</p:column>
+						
 						<p:column headerText="Ações">
 
 							<p:commandButton id="remover"
@@ -58,7 +62,7 @@
 				<p:dialog header="Edição de função" widgetVar="dlgEdita"
 					resizable="false" modal="true" showEffect="fade" width="300">
 					<h:form id="formEdita">
-						<p:panelGrid id="editaFuncionario" columns="2">
+						<p:panelGrid id="editaFuncao" columns="2">
 							<p:outputLabel value="Id" for="id" />
 							<h:inputText id="id" value="#{funcaoBean.funcao.id}"
 								readonly="true" />
@@ -69,22 +73,22 @@
 						</p:panelGrid>
 						<p:commandButton update=":form:funcionarios"
 							oncomplete="PF('dlgEdita').hide();" value="Salvar"
-							action="#{funcionarioBean.edita}"/>
+							action="#{funcaoBean.edita}"/>
 					</h:form>
 				</p:dialog>
 
 				<p:dialog header="Nova função" widgetVar="dlgNovo" resizable="false"
 					modal="true" showEffect="fade" width="300">
 					<h:form id="frmNovo">
-					  <p:panelGrid id="novoFuncionario" columns="2">
+					  <p:panelGrid id="novaFuncao" columns="2">
 							
 						<p:outputLabel value="Função" for="nome" />
 						<p:inputText id="nome" value="#{funcaoBean.funcao.nome}"
 				                     required="true" label="Nome" />
 					 </p:panelGrid>
-						<p:commandButton update=":form:funcoes"
+						<p:commandButton update=":form:funcionarios"
 							oncomplete="PF('dlgNovo').hide();" value="Salvar"
-							icon="ui-icon-disk" actionListener="#{funcionarioBean.adiciona}">
+							icon="ui-icon-disk" actionListener="#{funcaoBean.adiciona}">
 						</p:commandButton>
 					</h:form>
 
