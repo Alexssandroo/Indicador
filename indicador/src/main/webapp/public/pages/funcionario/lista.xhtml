@@ -60,37 +60,52 @@
 					</p:dataTable>
 				</h:form>
 
-				<p:dialog header="Edição de função" widgetVar="dlgEdita"
-					resizable="false" modal="true" showEffect="fade" width="300">
+				<p:dialog header="Edição de funcionario" widgetVar="dlgEdita"
+					resizable="false" modal="true" showEffect="fade" width="350">
 					<h:form id="formEdita">
 						<p:panelGrid id="editaFuncao" columns="2">
 							<p:outputLabel value="Id" for="id" />
-							<h:inputText id="id" value="#{funcaoBean.funcao.id}"
+							<h:inputText id="id" value="#{funcionarioBean.funcionario.id}"
 								readonly="true" />
 
 							<p:outputLabel value="Nome" for="nome" />
-							<p:inputText id="nome" value="#{funcaoBean.funcao.nome}"
+							<p:inputText id="nome" value="#{funcionarioBean.funcionario.nome}"
 								required="true" />
 						</p:panelGrid>
-						<p:commandButton update=":form:funcionarios"
+						<p:commandButton update=":form:funcionarios" icon="ui-icon-disk"
 							oncomplete="PF('dlgEdita').hide();" value="Salvar"
 							action="#{funcaoBean.edita}"/>
 					</h:form>
 				</p:dialog>
 
-				<p:dialog header="Nova função" widgetVar="dlgNovo" resizable="false"
-					modal="true" showEffect="fade" width="300">
+				<p:dialog header="Novo funcionário" widgetVar="dlgNovo" resizable="false"
+					modal="true" showEffect="fade" width="350" >
 					<h:form id="frmNovo">
-					  <p:panelGrid id="novaFuncao" columns="2">
-							
-						<p:outputLabel value="Função" for="nome" />
-						<p:inputText id="nome" value="#{funcaoBean.funcao.nome}"
-				                     required="true" label="Nome" />
-					 </p:panelGrid>
-						<p:commandButton update=":form:funcionarios"
-							oncomplete="PF('dlgNovo').hide();" value="Salvar"
-							icon="ui-icon-disk" actionListener="#{funcaoBean.adiciona}">
-						</p:commandButton>
+					<p:panelGrid id="novoFuncionario" columns="2">
+						<p:outputLabel value="Nome" for="nome" />
+						<p:inputText id="nome" required="true" label="Nome"
+							value="#{funcionarioBean.funcionario.nome}" placeholder="Nome do funcionario"/>
+						<p:outputLabel value="Matricula" for="mat" />
+						<p:inputText id="mat" required="true" label="Matricula"
+							value="#{funcionarioBean.funcionario.matricula}" />
+						<p:outputLabel value="Função" for="funcao" />
+						<p:selectOneMenu id="funcao" label="Função" required="true" 
+						 value="#{funcionarioBean.funcionario.funcao.id}">
+							<f:selectItem itemLabel="Selecione uma funcao" noSelectionOption="true"/>
+							<f:selectItems value="#{funcionarioBean.funcoes}" var="f"
+								itemLabel="#{f.nome}" itemValue="#{f.id}" />
+						</p:selectOneMenu>
+						<h:outputLabel value="Grupo" for="grupo" />
+						<p:selectOneMenu id="grupo" label="Grupo" required="true" 
+						 value="#{funcionarioBean.funcionario.grupo.id}">
+							<f:selectItem itemLabel="Selecione um grupo" noSelectionOption="true"/>
+							<f:selectItems value="#{funcionarioBean.grupos}" var="g"
+								itemLabel="#{g.nome}" itemValue="#{g.id}" />
+						</p:selectOneMenu>
+						</p:panelGrid>
+					<p:commandButton value="Salvar" icon="ui-icon-disk" actionListener="#{funcionarioBean.adiciona}" 
+									update=":form:funcionarios" oncomplete="PF('dlgNovo').hide();">
+				    </p:commandButton>
 					</h:form>
 
 				</p:dialog>
