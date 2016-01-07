@@ -17,7 +17,7 @@
 				<h:form id="form">
 					<p:toolbar>
 						<f:facet name="right">
-							<p:commandButton value="Novo" icon="ui-icon-plus" onclick="PF('dlgNovo').show();" process="@this"></p:commandButton>
+							<p:commandButton value="Novo" icon="ui-icon-plus" onclick="PF('dlgNovo').show();" process="@this" />
 							<p:commandButton value="Buscar" icon="ui-icon-search"
 								action="#{funcionarioBean.lista}" process="@this" update="funcionarios">
 							</p:commandButton>

@@ -30,15 +30,7 @@ public class FuncionarioBean implements Serializable {
 	public void novo(){
 		funcionario = new Funcionario();
 	}
-	
-	public FuncionarioBean() {
-		this.funcionario = new Funcionario();
-		this.funcionario.setFuncao(new Funcao());
-		this.funcionario.setGrupo(new Grupo());
-		this.funcionarios = new ArrayList<Funcionario>();
 		
-	}
-	
 	public void adiciona(){
 		FuncionarioDao dao = new FuncionarioDao();
 		dao.adiciona(this.funcionario);
@@ -48,8 +40,10 @@ public class FuncionarioBean implements Serializable {
 	}
 	@PostConstruct
 	public void init() {
+		this.funcionario = new Funcionario();
 		this.funcionario.setFuncao(new Funcao());
 		this.funcionario.setGrupo(new Grupo());
+		this.funcionarios = new ArrayList<Funcionario>();
 	}
 	
 	public void limpar(){
