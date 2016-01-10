@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/templates/template.xhtml">
+	<ui:define name="corpo">
+		<div class="panel panel-default">
+			<div class="panel-heading">Lançamento de ocorrências</div>
+			<div class="panel-body">
+
+				<h:form id="form">
+					<p:panelGrid columns="2">
+						<p:outputLabel value="Funcionario" for="nome" />
+						<h:selectOneMenu required="true" id="nome"
+							value="#{ocorrenciaBean.ocorrencia.funcionario.id}">
+							<f:selectItems value="#{ocorrenciaBean.funcionarios}" var="func"
+								itemLabel="#{func.nome}" itemValue="#{func.id}" />
+						</h:selectOneMenu>
+
+
+						<p:outputLabel value="Data" for="dat" />
+						<p:calendar id="dat" required="true" label="Data"
+							value="#{ocorrenciaBean.ocorrencia.dataOcorrencia}" />
+
+						<p:outputLabel value="Tipo Ocorrencia" for="tipOco" />
+						<h:selectOneMenu label="Escolha um tipo" required="true"
+							id="tipOco" value="#{ocorrenciaBean.ocorrencia.ocorrencia}">
+							<f:selectItems value="#{ocorrenciaBean.todoTipo}" var="tipo"
+								itemLabel="#{tipo}" itemValue="#{tipo}" />
+						</h:selectOneMenu>
+
+						<p:outputLabel value="Descrição" for="descricao" />
+						<p:inputTextarea id="descricao" rows="3" cols="120"
+							required="true" label="Descrição"
+							value="#{ocorrenciaBean.ocorrencia.observacao}">
+							<f:validateLength maximum="1000" />
+						</p:inputTextarea>
+					</p:panelGrid>
+					<p:commandButton value="Salvar" icon="ui-icon-disk"
+						action="#{ocorrenciaBean.adiciona}" update=":form">
+					</p:commandButton>
+
+				</h:form>
+
+			</div>
+		</div>
+
+
+
+	</ui:define>
+</ui:composition>
+
+</html>
