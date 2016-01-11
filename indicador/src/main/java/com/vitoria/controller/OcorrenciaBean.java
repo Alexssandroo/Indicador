@@ -21,6 +21,7 @@ public class OcorrenciaBean implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private Ocorrencia ocorrencia;
+	private Funcionario funcionario;
 	private List<Ocorrencia> ocorrencias;
 	private List<Funcionario> funcionarios;
 	
@@ -32,6 +33,7 @@ public class OcorrenciaBean implements Serializable{
 	
 	public void limpar(){
 		this.ocorrencia = new Ocorrencia();
+		this.funcionario = new Funcionario();
 		this.funcionarios = new ArrayList<Funcionario>();
 	}
 	
@@ -70,6 +72,10 @@ public class OcorrenciaBean implements Serializable{
 
 	public List<Ocorrencia> getOcorrencias() {
 		return ocorrencias;
+	}
+
+	public Funcionario getFuncionario() {
+		return funcionario;
 	}
 	
 	

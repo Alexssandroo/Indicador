@@ -4,27 +4,26 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.NoResultException;
-import com.vitoria.model.Ocorrencia;
+import com.vitoria.model.Indicador;
 import com.vitoria.util.JPAUtil;
 
-public class OcorrenciaDao {
-	
-	public List<Ocorrencia> lista() {
+public class IndicadorDao {
+	public List<Indicador> lista() {
 		EntityManager manager = new JPAUtil().getEntityManager();
 		try {
-			return manager.createQuery("select u from Ocorrencia u", Ocorrencia.class)
+			return manager.createQuery("select u from Indicador u", Indicador.class)
 					.getResultList();
 		} finally {
 			manager.close();
 		}
 	}
 	
-	public void adiciona(Ocorrencia Ocorrencia) {
+	public void adiciona(Indicador indicador) {
 		EntityManager manager = new JPAUtil().getEntityManager();
 		EntityTransaction transaction = manager.getTransaction();
 		try {
 			transaction.begin();
-			manager.persist(Ocorrencia);
+			manager.persist(indicador);
 			transaction.commit();
 		} catch (Exception e) {
 			if (transaction.isActive()) {
@@ -35,12 +34,12 @@ public class OcorrenciaDao {
 		}
 	}
 	
-	public void atualiza(Ocorrencia Ocorrencia) {
+	public void atualiza(Indicador indicador) {
 		EntityManager manager = new JPAUtil().getEntityManager();
 		EntityTransaction transaction = manager.getTransaction();
 		try {
 			transaction.begin();
-			manager.merge(Ocorrencia);
+			manager.merge(indicador);
 			transaction.commit();
 		} catch (Exception e) {
 			if (transaction.isActive()) {
@@ -51,12 +50,12 @@ public class OcorrenciaDao {
 		}
 	}
 	
-	public void remove(Ocorrencia Ocorrencia) {
+	public void remove(Indicador indicador) {
 		EntityManager manager = new JPAUtil().getEntityManager();
 		EntityTransaction transaction = manager.getTransaction();
 		try {
 			transaction.begin();
-			manager.remove(manager.merge(Ocorrencia));
+			manager.remove(manager.merge(indicador));
 			transaction.commit();
 		} catch (Exception e) {
 			if (transaction.isActive()) {
@@ -67,22 +66,22 @@ public class OcorrenciaDao {
 		}
 	}
 	
-	public Ocorrencia busca(Integer id) {
+	public Indicador busca(Integer id) {
 		EntityManager manager = new JPAUtil().getEntityManager();
 		try {
-			return manager.find(Ocorrencia.class, id);
+			return manager.find(Indicador.class, id);
 		} finally {
 			manager.close();
 		}
 	}
 	
-	public Ocorrencia buscaPor(String nome, String funcao) {
+	public Indicador buscaPor(String nome, String funcao) {
 		EntityManager manager = new JPAUtil().getEntityManager();
 		try {
 			return manager
 					.createQuery(
-							"select u from Ocorrencia u "
-									+ "where u.nome = :nome and u.funcao = :funcao", Ocorrencia.class)
+							"select u from Indicador u "
+									+ "where u.nome = :nome and u.funcao = :funcao", Indicador.class)
 					.setParameter("nome", nome)
 					.setParameter("funcao", funcao)
 					.getSingleResult();
@@ -92,6 +91,7 @@ public class OcorrenciaDao {
 			manager.close();
 		}
 	}
+
 
 
 }

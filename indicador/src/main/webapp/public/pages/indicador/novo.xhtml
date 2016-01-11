@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/templates/template.xhtml">
+	<ui:define name="corpo">
+		<div class="panel panel-default">
+			<div class="panel-heading">Cadastro de indicadores</div>
+			<div class="panel-body">
+
+				<h:form id="form">
+					<p:panelGrid columns="2">
+					
+						<p:outputLabel value="Nome" for="nome" />
+						<p:inputText required="true" id="nome" value="#{indicadorBean.indicador.nome}"/>
+						
+						<p:outputLabel value="Tipo Indicador" for="tipInd" />
+						<p:selectOneMenu label="Escolha um tipo" required="true"
+							id="tipInd" value="#{indicadorBean.indicador.tipoIndicador}">
+							<f:selectItems value="#{indicadorBean.tipoIndicador}" var="tpIndicador"
+								itemLabel="#{tpIndicador}" itemValue="#{tpIndicador}" />
+						</p:selectOneMenu>
+						
+						<p:outputLabel value="Tipo Aplicação" for="tipApl" />
+						<p:selectOneMenu label="Escolha um tipo" required="true"
+							id="tipApl" value="#{indicadorBean.indicador.tipoAplicacaoIndicador}">
+							<f:selectItems value="#{indicadorBean.tipoAplicaIndicador}" var="tpAplicacao"
+								itemLabel="#{tpAplicacao}" itemValue="#{tpAplicacao}" />
+						</p:selectOneMenu>
+			
+					</p:panelGrid>
+					<p:commandButton value="Salvar" icon="ui-icon-disk"
+						action="#{indicadorBean.adiciona}" update=":form">
+					</p:commandButton>
+
+				</h:form>
+
+			</div>
+		</div>
+
+
+
+	</ui:define>
+</ui:composition>
+
+</html>

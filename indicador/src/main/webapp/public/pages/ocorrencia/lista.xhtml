@@ -17,16 +17,20 @@
 				<h:form id="form">
 					<p:toolbar>
 						<f:facet name="right">
-							<p:commandButton value="Novo" icon="ui-icon-plus" onclick="PF('dlgNovo').show();" process="@this" />
+							<p:commandButton value="Novo" icon="ui-icon-plus"
+								onclick="PF('dlgNovo').show();" process="@this"/>
 							<p:commandButton value="Buscar" icon="ui-icon-search"
-								action="#{ocorrenciaBean.lista}" process="@this" update="ocorrencias">
+								action="#{ocorrenciaBean.lista}" process="@this"
+								update="ocorrencias">
 							</p:commandButton>
 						</f:facet>
 					</p:toolbar>
 					<p:dataTable rendered="true" id="ocorrencias" var="ocorrencia"
-						value="#{ocorrenciaBean.ocorrencias}" emptyMessage="Ocorrências não encontradas."
-						initMode="immediate" selection="#{ocorrenciaBean.ocorrencia}" 
-						paginator="true" rows="10" paginatorPosition="bottom" paginatorAlwaysVisible="false">
+						value="#{ocorrenciaBean.ocorrencias}"
+						emptyMessage="Ocorrências não encontradas." initMode="immediate"
+						selection="#{ocorrenciaBean.ocorrencia}" paginator="true"
+						rows="10" paginatorPosition="bottom"
+						paginatorAlwaysVisible="false">
 						<p:column id="id" headerText="Id">
 							<h:outputText value="#{ocorrencia.id}" />
 						</p:column>
@@ -40,16 +44,17 @@
 						<p:column id="funcionario" headerText="Funcionario">
 							<h:outputText value="#{ocorrencia.funcionario.nome}" />
 						</p:column>
-						
+
 						<p:column headerText="Ações">
 
 							<p:commandButton id="remover"
-								action="#{ocorrenciaBean.remover(ocorrencia)}" icon="ui-icon-trash"
-								process="@this" update="ocorrencias" />
+								action="#{ocorrenciaBean.remover(ocorrencia)}"
+								icon="ui-icon-trash" process="@this" update="ocorrencias" />
 
 							<p:commandButton id="editar" icon="ui-icon-pencil"
 								update="formEdita" onclick="PF('dlgEdita').show();">
-								<f:setPropertyActionListener target="#{funcionarioBean.funcionario}" value="#{funcionario}" />
+								<f:setPropertyActionListener
+									target="#{funcionarioBean.funcionario}" value="#{funcionario}" />
 							</p:commandButton>
 
 						</p:column>
@@ -62,48 +67,55 @@
 					<h:form id="formEdita">
 						<p:panelGrid id="editaFuncao" columns="2">
 							<p:outputLabel value="Id" for="id" />
-							<h:inputText id="id" value="#{funcionarioBean.funcionario.id}"
+							<p:inputText id="id" value="#{funcionarioBean.funcionario.id}"
 								readonly="true" />
 
 							<p:outputLabel value="Nome" for="nome" />
-							<p:inputText id="nome" value="#{funcionarioBean.funcionario.nome}"
-								required="true" />
+							<p:inputText id="nome"
+								value="#{funcionarioBean.funcionario.nome}" required="true" />
 						</p:panelGrid>
 						<p:commandButton update=":form:ocorrencias" icon="ui-icon-disk"
 							oncomplete="PF('dlgEdita').hide();" value="Salvar"
-							action="#{funcaoBean.edita}"/>
+							action="#{funcaoBean.edita}" />
 					</h:form>
-					
+
 				</p:dialog>
 
-				<p:dialog header="Novo funcionário" widgetVar="dlgNovo" resizable="false"
-					modal="true" showEffect="fade" width="350" >
+				<p:dialog header="Novo funcionário" widgetVar="dlgNovo"
+					resizable="false" modal="true" showEffect="fade" width="350">
 					<h:form id="frmNovo">
-					<p:panelGrid id="novoFuncionario" columns="2">
-						<p:outputLabel value="Nome" for="nome" />
-						<p:inputText id="nome" required="true" label="Nome"
-							value="#{funcionarioBean.funcionario.nome}" placeholder="Nome do funcionario"/>
-						<p:outputLabel value="Matricula" for="mat" />
-						<p:inputText id="mat" required="true" label="Matricula"
-							value="#{funcionarioBean.funcionario.matricula}" />
-						<p:outputLabel value="Função" for="funcao" />
-						<p:selectOneMenu id="funcao" label="Função" required="true" 
-						 value="#{funcionarioBean.funcionario.funcao.id}">
-							<f:selectItem itemLabel="Selecione uma funcao" noSelectionOption="true"/>
-							<f:selectItems value="#{funcionarioBean.funcoes}" var="f"
-								itemLabel="#{f.nome}" itemValue="#{f.id}" />
-						</p:selectOneMenu>
-						<h:outputLabel value="Grupo" for="grupo" />
-						<p:selectOneMenu id="grupo" label="Grupo" required="true" 
-						 value="#{funcionarioBean.funcionario.grupo.id}">
-							<f:selectItem itemLabel="Selecione um grupo" noSelectionOption="true"/>
-							<f:selectItems value="#{funcionarioBean.grupos}" var="g"
-								itemLabel="#{g.nome}" itemValue="#{g.id}" />
-						</p:selectOneMenu>
+						<p:panelGrid id="novaOcorrencia" columns="2">
+							<p:outputLabel value="Funcionario" for="nome" />
+							<p:selectOneMenu required="true" id="nome"
+								value="#{ocorrenciaBean.ocorrencia.funcionario.id}">
+								<f:selectItems value="#{ocorrenciaBean.funcionarios}" var="func"
+									itemLabel="#{func.nome}" itemValue="#{func.id}" />
+							</p:selectOneMenu>
+
+
+							<p:outputLabel value="Data" for="dat" />
+							<p:calendar id="dat" required="true" label="Data"
+								value="#{ocorrenciaBean.ocorrencia.dataOcorrencia}" />
+
+							<p:outputLabel value="Tipo Ocorrencia" for="tipOco" />
+							<p:selectOneMenu label="Escolha um tipo" required="true"
+								id="tipOco" value="#{ocorrenciaBean.ocorrencia.ocorrencia}">
+								<f:selectItems value="#{ocorrenciaBean.todoTipo}" var="tipo"
+									itemLabel="#{tipo}" itemValue="#{tipo}" />
+							</p:selectOneMenu>
+
+							<p:outputLabel value="Observação" for="observacao" />
+							<p:inputTextarea id="observacao" rows="3" cols="120"
+								required="false" label="Observação"
+								value="#{ocorrenciaBean.ocorrencia.observacao}">
+								<f:validateLength maximum="1000" />
+							</p:inputTextarea>
 						</p:panelGrid>
-					<p:commandButton value="Salvar" icon="ui-icon-disk" actionListener="#{funcionarioBean.adiciona}" 
-									update=":form:ocorrencias" oncomplete="PF('dlgNovo').hide();">
-				    </p:commandButton>
+						<p:commandButton value="Salvar" icon="ui-icon-disk"
+							actionListener="#{ocorrenciaBean.adiciona}"
+							update=":form:ocorrencias" oncomplete="PF('dlgNovo').hide();">
+						</p:commandButton>
+
 					</h:form>
 
 				</p:dialog>

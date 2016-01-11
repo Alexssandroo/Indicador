@@ -1,0 +1,142 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:t="http://myfaces.apache.org/tomahawk">
+
+<ui:composition template="/templates/template.xhtml">
+	<ui:define name="corpo">
+
+		<div class="panel panel-default">
+			<div class="panel-heading">Indicadores de Manutenção</div>
+			<div class="panel-body">
+				<h:form id="form">
+					<p:toolbar>
+						<f:facet name="right">
+							<p:commandButton value="Novo" icon="ui-icon-plus"
+								onclick="PF('dlgNovo').show();" process="@this" />
+							<p:commandButton value="Buscar" icon="ui-icon-search"
+								action="#{indicadorBean.lista}" process="@this"
+								update="indicadores">
+							</p:commandButton>
+						</f:facet>
+					</p:toolbar>
+					<p:dataTable rendered="true" id="indicadores" var="indicador"
+						value="#{indicadorBean.indicadores}"
+						emptyMessage="Indicadores não encontrados." initMode="immediate"
+						selection="#{indicadorBean.indicador}" paginator="true" rows="10"
+						paginatorPosition="bottom" paginatorAlwaysVisible="false">
+						<p:column id="id" headerText="Id">
+							<h:outputText value="#{indicador.id}" />
+						</p:column>
+
+						<p:column id="nome" headerText="Nome">
+							<h:outputText value="#{indicador.nome}" />
+						</p:column>
+						<p:column id="tpIndicador" headerText="Tipo">
+							<h:outputText value="#{indicador.tipoIndicador}" />
+						</p:column>
+						<p:column id="tpAplicacao" headerText="Aplicação">
+							<h:outputText value="#{indicador.tipoAplicacaoIndicador}" />
+						</p:column>
+
+						<p:column headerText="Ações">
+
+							<p:commandButton id="remover"
+								action="#{indicadorBean.remove(indicador)}" icon="ui-icon-trash"
+								process="@this" update="indicadores" />
+
+							<p:commandButton id="editar" icon="ui-icon-pencil"
+								update="formEdita" onclick="PF('dlgEdita').show();">
+								<f:setPropertyActionListener target="#{indicadorBean.indicador}"
+									value="#{indicador}" />
+							</p:commandButton>
+
+						</p:column>
+
+					</p:dataTable>
+				</h:form>
+
+				<p:dialog header="Edição de indicador" widgetVar="dlgEdita"
+					resizable="false" modal="true" showEffect="fade" width="350">
+					<h:form id="formEdita">
+						<p:panelGrid id="pnEdita" columns="2">
+							<p:outputLabel value="Id" for="id" />
+							<h:inputText id="id" value="#{indicadorBean.indicador.id}"
+								readonly="true"  />
+							<p:outputLabel value="Nome" for="nome" />
+							<p:inputText id="nome"
+								value="#{indicadorBean.indicador.nome}" required="true" />
+								<p:outputLabel value="Tipo Indicador" for="tipInd" />
+							<p:selectOneMenu label="Escolha um tipo" required="true"
+								id="tipInd" value="#{indicadorBean.indicador.tipoIndicador}">
+								<f:selectItems value="#{indicadorBean.tipoIndicador}"
+									var="tpIndicador" itemLabel="#{tpIndicador}"
+									itemValue="#{tpIndicador}" />
+							</p:selectOneMenu>
+
+							<p:outputLabel value="Tipo Aplicação" for="tipApl" />
+							<p:selectOneMenu label="Escolha um tipo" required="true"
+								id="tipApl"
+								value="#{indicadorBean.indicador.tipoAplicacaoIndicador}">
+								<f:selectItems value="#{indicadorBean.tipoAplicaIndicador}"
+									var="tpAplicacao" itemLabel="#{tpAplicacao}"
+									itemValue="#{tpAplicacao}" />
+							</p:selectOneMenu>
+									
+						</p:panelGrid>
+						
+						<p:commandButton update=":form:indicadores" icon="ui-icon-disk"
+							oncomplete="PF('dlgEdita').hide();" value="Salvar"
+							action="#{indicadorBean.edita(indicador)}" />
+					</h:form>
+
+				</p:dialog>
+
+				<p:dialog header="Novo Indicador" widgetVar="dlgNovo"
+					resizable="false" modal="true" showEffect="fade" width="350">
+					<h:form id="frmNovo">
+						<p:panelGrid id="novoIndic" columns="2" >
+						
+							<p:outputLabel value="Nome" for="nome" />
+							<p:inputText required="true" id="nome"
+								value="#{indicadorBean.indicador.nome}" />
+
+							<p:outputLabel value="Tipo Indicador" for="tipInd" />
+							<p:selectOneMenu label="Escolha um tipo" required="true"
+								id="tipInd" value="#{indicadorBean.indicador.tipoIndicador}">
+								<f:selectItems value="#{indicadorBean.tipoIndicador}"
+									var="tpIndicador" itemLabel="#{tpIndicador}"
+									itemValue="#{tpIndicador}" />
+							</p:selectOneMenu>
+
+							<p:outputLabel value="Tipo Aplicação" for="tipApl" />
+							<p:selectOneMenu label="Escolha um tipo" required="true"
+								id="tipApl"
+								value="#{indicadorBean.indicador.tipoAplicacaoIndicador}">
+								<f:selectItems value="#{indicadorBean.tipoAplicaIndicador}"
+									var="tpAplicacao" itemLabel="#{tpAplicacao}"
+									itemValue="#{tpAplicacao}" />
+							</p:selectOneMenu>
+						</p:panelGrid>
+						<p:commandButton value="Salvar" icon="ui-icon-disk"
+							actionListener="#{indicadorBean.adiciona}" update=":form:indicadores"
+							oncomplete="PF('dlgNovo').hide();">
+						</p:commandButton>
+					</h:form>
+
+				</p:dialog>
+
+			</div>
+		</div>
+
+
+
+	</ui:define>
+</ui:composition>
+
+</html>

@@ -8,6 +8,8 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import org.hibernate.HibernateException;
+
 import com.vitoria.dao.FuncaoDao;
 import com.vitoria.dao.FuncionarioDao;
 import com.vitoria.dao.GrupoDao;
@@ -33,10 +35,13 @@ public class FuncionarioBean implements Serializable {
 		
 	public void adiciona(){
 		FuncionarioDao dao = new FuncionarioDao();
-		dao.adiciona(this.funcionario);
-		new FacesUtils().adcionaMensagemSucesso("Funcionario adicionado com sucesso !");
-		this.limpar();
-		
+		try{
+			dao.adiciona(this.funcionario);
+			new FacesUtils().adcionaMensagemSucesso("Funcionario adicionado com sucesso !");
+			this.limpar();			
+		}catch(HibernateException e){
+			new FacesUtils().adcionaMensagemErro("Erro ao adicionar");
+		}		
 	}
 	@PostConstruct
 	public void init() {
@@ -61,9 +66,13 @@ public class FuncionarioBean implements Serializable {
 	
 	public void remover(Funcionario funcionario){
 		FuncionarioDao dao = new FuncionarioDao();
+		try{
 		dao.remove(funcionario);
 		this.funcionarios = dao.lista();
-		new FacesUtils().adcionaMensagemSucesso("Função removida com sucesso !");
+		new FacesUtils().adcionaMensagemSucesso("Funcionario removido com sucesso !");
+		}catch(HibernateException e){
+			new FacesUtils().adcionaMensagemErro("Erro ao remover");
+		}
 		
 	}
 	
