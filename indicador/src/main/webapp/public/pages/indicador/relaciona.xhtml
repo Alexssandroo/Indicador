@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/templates/template.xhtml">
+	<ui:define name="corpo">
+		<div class="panel panel-default">
+			<div class="panel-heading">Relação Indicador/Grupo</div>
+			<div class="panel-body">
+
+				<h:form id="form">
+					<p:panelGrid columns="2">
+	
+						<h:outputText value="Grupo" for="grupo"/>
+						<p:selectOneMenu id="grupo" value="#{relacionaGrupoIndicadorBean.indicadorPorGrupo.grupo.id}"
+							required="true" >
+							<f:selectItems value="#{relacionaGrupoIndicadorBean.grupos}" var="g"
+								itemLabel="#{g.nome}" itemValue="#{g.id}" />
+						</p:selectOneMenu>
+						
+						<h:outputText value="Indicador" for="indicador"/>
+						<p:selectOneMenu id="indicador" value="#{relacionaGrupoIndicadorBean.indicadorPorGrupo.indicador.id}"
+							required="true">
+							<f:selectItems value="#{relacionaGrupoIndicadorBean.indicadores}" var="i"
+								itemLabel="#{i.nome}" itemValue="#{i.id}" />
+						</p:selectOneMenu>
+						
+						<h:outputText value="Meta" for="meta"/>
+						<p:inputText id="meta" value="#{relacionaGrupoIndicadorBean.indicadorPorGrupo.meta}" />
+						
+					</p:panelGrid>
+					
+					<p:commandButton value="Salvar" icon="ui-icon-disk" action="#{relacionaGrupoIndicadorBean.adiciona}"
+					 update=":form" />
+					
+				</h:form>
+
+			</div>
+		</div>
+
+
+
+	</ui:define>
+</ui:composition>
+
+</html>

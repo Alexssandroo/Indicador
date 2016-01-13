@@ -24,8 +24,6 @@ public class IndicadorBean implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private Indicador indicador;
-	
-
 	private List<Indicador> indicadores;
 	
 	@PostConstruct

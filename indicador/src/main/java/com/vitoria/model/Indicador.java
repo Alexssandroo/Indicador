@@ -20,6 +20,7 @@ public class Indicador implements Serializable {
 	private String nome;
 	private TipoIndicador tipoIndicador;
 	private TipoAplicacaoIndicador tipoAplicacaoIndicador;
+	private String descricao;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -49,7 +50,12 @@ public class Indicador implements Serializable {
 	public void setTipoAplicacaoIndicador(TipoAplicacaoIndicador tipoAplicacaoIndicador) {
 		this.tipoAplicacaoIndicador = tipoAplicacaoIndicador;
 	}
-	
+	public String getDescricao() {
+		return descricao;
+	}
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;

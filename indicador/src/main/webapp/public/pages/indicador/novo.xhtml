@@ -32,7 +32,11 @@
 							<f:selectItems value="#{indicadorBean.tipoAplicaIndicador}" var="tpAplicacao"
 								itemLabel="#{tpAplicacao}" itemValue="#{tpAplicacao}" />
 						</p:selectOneMenu>
-			
+						
+						<p:outputLabel value="Definição" for="def" />
+						<p:inputTextarea id="def" required="true" value="#{indicadorBean.indicador.descricao}"/>
+						
+						
 					</p:panelGrid>
 					<p:commandButton value="Salvar" icon="ui-icon-disk"
 						action="#{indicadorBean.adiciona}" update=":form">

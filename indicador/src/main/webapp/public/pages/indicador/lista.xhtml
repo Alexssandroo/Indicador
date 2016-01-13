@@ -67,11 +67,11 @@
 						<p:panelGrid id="pnEdita" columns="2">
 							<p:outputLabel value="Id" for="id" />
 							<h:inputText id="id" value="#{indicadorBean.indicador.id}"
-								readonly="true"  />
+								readonly="true" />
 							<p:outputLabel value="Nome" for="nome" />
-							<p:inputText id="nome"
-								value="#{indicadorBean.indicador.nome}" required="true" />
-								<p:outputLabel value="Tipo Indicador" for="tipInd" />
+							<p:inputText id="nome" value="#{indicadorBean.indicador.nome}"
+								required="true" />
+							<p:outputLabel value="Tipo Indicador" for="tipInd" />
 							<p:selectOneMenu label="Escolha um tipo" required="true"
 								id="tipInd" value="#{indicadorBean.indicador.tipoIndicador}">
 								<f:selectItems value="#{indicadorBean.tipoIndicador}"
@@ -87,12 +87,12 @@
 									var="tpAplicacao" itemLabel="#{tpAplicacao}"
 									itemValue="#{tpAplicacao}" />
 							</p:selectOneMenu>
-									
+
 						</p:panelGrid>
-						
+
 						<p:commandButton update=":form:indicadores" icon="ui-icon-disk"
 							oncomplete="PF('dlgEdita').hide();" value="Salvar"
-							action="#{indicadorBean.edita(indicador)}" />
+							action="#{indicadorBean.edita}" />
 					</h:form>
 
 				</p:dialog>
@@ -100,8 +100,8 @@
 				<p:dialog header="Novo Indicador" widgetVar="dlgNovo"
 					resizable="false" modal="true" showEffect="fade" width="350">
 					<h:form id="frmNovo">
-						<p:panelGrid id="novoIndic" columns="2" >
-						
+						<p:panelGrid id="novoIndic" columns="2">
+
 							<p:outputLabel value="Nome" for="nome" />
 							<p:inputText required="true" id="nome"
 								value="#{indicadorBean.indicador.nome}" />
@@ -122,19 +122,20 @@
 									var="tpAplicacao" itemLabel="#{tpAplicacao}"
 									itemValue="#{tpAplicacao}" />
 							</p:selectOneMenu>
+							<p:outputLabel value="Definição" for="def" />
+							<p:inputTextarea id="def" required="true"
+								value="#{indicadorBean.indicador.descricao}" />
+
 						</p:panelGrid>
 						<p:commandButton value="Salvar" icon="ui-icon-disk"
-							actionListener="#{indicadorBean.adiciona}" update=":form:indicadores"
-							oncomplete="PF('dlgNovo').hide();">
+							actionListener="#{indicadorBean.adiciona}"
+							update=":form:indicadores" oncomplete="PF('dlgNovo').hide();">
 						</p:commandButton>
 					</h:form>
-
 				</p:dialog>
-
+				
 			</div>
 		</div>
-
-
 
 	</ui:define>
 </ui:composition>
